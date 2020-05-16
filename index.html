@@ -1,0 +1,244 @@
+<!-- DO NOT BE EVIL!!! -->
+<!DOCTYPE html>
+<html class="hola-html-reset hola-var" lang="zh-CN" style="--hola-primary-color: #3498db;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>杭电助手</title>
+    <link rel="stylesheet" href="/css/holakit.css">
+    <style>
+      body .font-theme {
+        font-family: Montserrat,SF Pro SC,SF Pro Text,SF Pro Icons,PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif!important
+      }
+
+      .fucking-right {
+        float: right;
+        text-align: right;
+      }
+      .fucking-qr {
+        float: center;
+        padding-left: 20%;
+        padding-right: 20%;
+      }
+      .hola-card {
+        border-radius: 3px;
+      }
+      .hola-navbar {
+        height: 60px;
+      }
+      .desc-line {
+        font-size: .8em;
+      }
+    </style>
+    <script src="/js/easy.qrcode.min.js"></script>
+  </head>
+  <body class="hola-body-typography hola-grey-bg">
+    
+    <header class="hola-navbar hola-navbar-transparent hola-navbar-darkbg" style="height: 80px;">
+      <div class="hola-container">
+        <nav class="hola-navbar-main">
+          <a href="#" class="hola-navbar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="hsla(0,0%,100%,.6)"/>
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+  
+    <div class="hola-hero hola-hero-dark-bg" style="min-height: 90px; max-height: 120px">
+      <div class="hola-container">
+        <h2 style="padding-left: 5%;">表单</h2>
+      </div>
+    </div>
+
+    <div class="hola-container" style="margin-top: -50px;">
+      <div class="hola-columns hola-card-stack">
+        <div class="hola-columns-item">
+          <div class="hola-card">
+            <h2 class="title" style="text-align: center; color: rgb(52, 152, 219);">学生离校请假</h2>
+            <p><b><span id="status">已上报</span></b></p>
+          </div>
+        </div>
+
+        <div class="hola-columns-item">
+          <div class="hola-card">
+            <p></p>
+            <div id="qrcode" style="text-align: center"></div>
+            <p></p>
+            <p style="text-align: center;"><b>当前时间: <span id="date"></span> <span id="time"></span></b></p>
+          </div>
+        </div>
+
+        <div class="hola-columns-item">
+          <div class="hola-card hola-card-list">
+            <div class="hola-card-list-item">
+              <b>姓名</b>
+              <span id="name" class="fucking-right">蛤蛤</span>
+            </div>
+            <div class="hola-card-list-item">
+              <b>学号</b>
+              <span id="student-id" class="fucking-right">1926</span>
+            </div>
+            <div class="hola-card-list-item">
+              <b>学院</b>
+              <span id="department" class="fucking-right">膜法学院</span>
+            </div>
+            <div class="hola-card-list-item">
+              <b>班级</b>
+              <span id="class-id" class="fucking-right">0817</span>
+            </div>
+            <div class="hola-card-list-item">
+              <b>辅导员</b>
+              <span id="boss" class="fucking-right">奈伊吾</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hola-columns-item">
+          <div class="hola-card hola-card-list">
+            <div class="hola-card-list-item">
+              <p style="text-align: center"><b>请假内容</b></p>
+            </div>            
+            <div class="hola-card-list-item">
+              <p>请假类型（必填）</p>
+              <select id="leave-type" value="0" style="width:100%" disabled="disabled">
+                <option value="0">&lt; 请选择 &gt;</option>
+                <option value="1">2小时以内</option>
+                <option value="2">2小时以上(当天门禁前回校)</option>
+                <option value="3">单位实习(按周请假)</option>
+                <option value="4">其他特殊情况</option>
+              </select>
+            </div>
+            <div class="hola-card-list-item">
+              <p style="margin-bottom: 0">请假开始日期（必填）</p>
+              <p class="desc-line">离开学校的日期</p>
+              <input id="start-time" type="date" style="width:100%" disabled="disabled" />
+            </div>
+            <div class="hola-card-list-item">
+              <p style="margin-bottom: 0">请假结束日期（必填）</p>
+              <p class="desc-line">返回学校的日期</p>
+              <input id="end-time" type="date" style="width:100%" disabled="disabled" />
+            </div>
+            <div class="hola-card-list-item">
+              <p style="margin-bottom: 0">请假原因（必填）</p>
+              <p class="desc-line">请说明请假的原因，如果有具体的离校时间，也可以附上</p>
+              <textarea id="leave-reason" style="width:100%" disabled="disabled" placeholder=""></textarea>
+            </div>
+            <div class="hola-card-list-item">
+              <p>请假期间是否离开浙江（必填）</p>
+              <select id="leave-zj" value="0" style="width:100%" disabled="disabled">
+                <option value="0">&lt; 请选择 &gt;</option>
+                <option value="1">否</option>
+                <option value="2">是</option>
+              </select>
+            </div>
+            <div class="hola-card-list-item">
+              <p style="margin-bottom: 0;">签名（必填）</p>
+              <p class="desc-line">本人郑重承诺:我承诺上述内容真实有效，离校期间注意自身安全，如有身体不适及时向学校报告</p>
+              <img id="sign-img" style="width:100%" src="" />
+              <p class="desc-line">请点击「确认」上传签名后再提交表单。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hola-columns-item">
+          <div class="hola-card hola-card-list">
+            <div class="hola-card-list-item">
+              <b>1审意见</b>
+              <span id="comment" class="fucking-right">无意见或备注</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      function updateDate() {
+        var date = new Date();
+        document.getElementById("date").innerText = (date.getMonth() + 1) + "月" + date.getDate() + "日 ";
+      }
+      
+      function updateTime() {
+        var date = new Date();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        var ampm = "AM";
+        if (hour > 12) {
+          hour -= 12;
+          ampm = "PM";
+        }
+        
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minute < 10) {
+          minute = "0" + minute;
+        }
+        if (second < 10) {
+          second = "0" + second;
+        }
+
+        document.getElementById("time").innerText = hour + ":" + minute + ":" + second + " " + ampm;
+      }
+
+      function generateUUID() {
+        var d = new Date().getTime();
+        var d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16;
+            if (d > 0) {
+                r = (d + r) % 16 | 0;
+                d = Math.floor(d / 16);
+            } else {
+                r = (d2 + r) % 16 | 0;
+                d2 = Math.floor(d2/16);
+            }
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+      }
+
+      function genQrCode(val) {
+        var options = {
+          version: 0,
+          text: 'https://qr.hduhelp.com/pass?id=' + generateUUID(),
+          correctLevel : QRCode.CorrectLevel.M,
+          width: 192,
+          height: 192,
+          colorDark : '#3498db',
+          colorLight : '#ffffff',
+          logo: '/img/icon.png', 
+          logoWidth: 64,
+          logoHeight: 64, 
+          logoBackgroundTransparent: true
+        };
+        new QRCode(document.getElementById("qrcode"), options);
+      }
+
+      function parseParams() {
+        var searchParams = new URLSearchParams(window.location.search);
+        for (var p of searchParams) {
+          var cur = document.getElementById(p[0]);
+          if (!cur) {
+            continue;
+          }
+
+          if (cur.tagName === "SPAN") {
+            cur.innerText = p[1];
+          } else if (cur.tagName === "IMG") {
+            cur.src = p[1];
+          } else {
+            cur.value = p[1];
+          }
+        }
+      }
+
+      updateDate();
+      setInterval(updateTime, 500);
+      genQrCode(Date.now());
+      parseParams();
+    </script>
+  </body>
+</html>
+  
