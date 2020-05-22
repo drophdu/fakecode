@@ -9,12 +9,11 @@
       body .font-theme {
         font-family: Montserrat,SF Pro SC,SF Pro Text,SF Pro Icons,PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif!important
       }
-
-      .fucking-right {
+      .align-right {
         float: right;
         text-align: right;
       }
-      .fucking-qr {
+      .qr {
         float: center;
         padding-left: 20%;
         padding-right: 20%;
@@ -28,15 +27,18 @@
       .desc-line {
         font-size: .8em;
       }
+      .hidden {
+        display: none;
+      }
     </style>
     <script src="/js/easy.qrcode.min.js"></script>
   </head>
   <body class="hola-body-typography hola-grey-bg">
     
-    <header class="hola-navbar hola-navbar-transparent hola-navbar-darkbg" style="height: 80px;">
+    <header class="hola-navbar hola-navbar-transparent hola-navbar-darkbg">
       <div class="hola-container">
         <nav class="hola-navbar-main">
-          <a href="#" class="hola-navbar-brand">
+          <a href="#" onclick="promptCookie();parseParams();" class="hola-navbar-brand">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
               <path d="M0 0h24v24H0z" fill="none"/>
               <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="hsla(0,0%,100%,.6)"/>
@@ -48,11 +50,11 @@
   
     <div class="hola-hero hola-hero-dark-bg" style="min-height: 90px; max-height: 120px">
       <div class="hola-container">
-        <h2 style="padding-left: 5%;">表单</h2>
+        <h2 style="padding-left: 5%; padding-top: 20px;">表单</h2>
       </div>
     </div>
 
-    <div class="hola-container" style="margin-top: -50px;">
+    <div class="hola-container" style="margin-top: -40px;">
       <div class="hola-columns hola-card-stack">
         <div class="hola-columns-item">
           <div class="hola-card">
@@ -74,23 +76,23 @@
           <div class="hola-card hola-card-list">
             <div class="hola-card-list-item">
               <b>姓名</b>
-              <span id="name" class="fucking-right">蛤蛤</span>
+              <span id="name" class="align-right">蛤蛤</span>
             </div>
             <div class="hola-card-list-item">
               <b>学号</b>
-              <span id="student-id" class="fucking-right">1926</span>
+              <span id="id" class="align-right">1926</span>
             </div>
             <div class="hola-card-list-item">
               <b>学院</b>
-              <span id="department" class="fucking-right">膜法学院</span>
+              <span id="school" class="align-right">膜法学院</span>
             </div>
             <div class="hola-card-list-item">
               <b>班级</b>
-              <span id="class-id" class="fucking-right">0817</span>
+              <span id="class" class="align-right">0817</span>
             </div>
             <div class="hola-card-list-item">
               <b>辅导员</b>
-              <span id="boss" class="fucking-right">奈伊吾</span>
+              <span id="boss" class="align-right">奈伊吾</span>
             </div>
           </div>
         </div>
@@ -113,17 +115,22 @@
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假开始日期（必填）</p>
               <p class="desc-line">离开学校的日期</p>
-              <input id="start-time" type="date" style="width:100%" disabled="disabled" />
+              <input id="date-from" type="date" style="width:100%" disabled="disabled" />
             </div>
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假结束日期（必填）</p>
               <p class="desc-line">返回学校的日期</p>
-              <input id="end-time" type="date" style="width:100%" disabled="disabled" />
+              <input id="date-to" type="date" style="width:100%" disabled="disabled" />
             </div>
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假原因（必填）</p>
               <p class="desc-line">请说明请假的原因，如果有具体的离校时间，也可以附上</p>
-              <textarea id="leave-reason" style="width:100%" disabled="disabled" placeholder=""></textarea>
+              <textarea id="excuse" style="width:100%" disabled="disabled" placeholder=""></textarea>
+            </div>
+            <div id="_item-attach" class="hola-card-list-item hidden">
+              <p style="margin-bottom: 0">附件</p>
+              <p class="desc-line">如果有相关材料可在此补充</p>
+              <img id="attach" style="width:100%" src="" />
             </div>
             <div class="hola-card-list-item">
               <p>请假期间是否离开浙江（必填）</p>
@@ -136,7 +143,7 @@
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0;">签名（必填）</p>
               <p class="desc-line">本人郑重承诺:我承诺上述内容真实有效，离校期间注意自身安全，如有身体不适及时向学校报告</p>
-              <img id="sign-img" style="width:100%" src="" />
+              <img id="sign" style="width:100%" src="" />
               <p class="desc-line">请点击「确认」上传签名后再提交表单。</p>
             </div>
           </div>
@@ -146,7 +153,11 @@
           <div class="hola-card hola-card-list">
             <div class="hola-card-list-item">
               <b>1审意见</b>
-              <span id="comment" class="fucking-right">无意见或备注</span>
+              <span id="comment1" class="align-right">无意见或备注</span>
+            </div>
+            <div id="_item-comment2" class="hola-card-list-item hidden">
+              <b>2审意见</b>
+              <span id="comment2" class="align-right">无意见或备注</span>
             </div>
           </div>
         </div>
@@ -154,6 +165,36 @@
     </div>
     
     <script>
+      function setCookie(cname, cvalue) {
+        var d = new Date(), exdays = 365;
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return null;
+      }
+
+      function promptCookie() {
+        key = prompt("请输入 id", "");
+        if (!key)
+          return;
+        value = prompt("请输入 " + key + " 的内容", "");
+        setCookie(key, value);
+      }
+
       function updateDate() {
         var date = new Date();
         document.getElementById("date").innerText = (date.getMonth() + 1) + "月" + date.getDate() + "日 ";
@@ -203,7 +244,7 @@
         var options = {
           version: 0,
           text: 'https://qr.hduhelp.com/pass?id=' + generateUUID(),
-          correctLevel : QRCode.CorrectLevel.M,
+          correctLevel : QRCode.CorrectLevel.L,
           width: 192,
           height: 192,
           colorDark : '#3498db',
@@ -216,21 +257,48 @@
         new QRCode(document.getElementById("qrcode"), options);
       }
 
+      function updateInfo(cur, data) {
+        if (cur.tagName === "SPAN") {
+          cur.innerText = data.toString();
+        } else if (cur.tagName === "IMG") {
+          cur.src = data.toString();
+        } else {
+          cur.value = data.toString();
+        }
+      }
+
       function parseParams() {
+        // Check cookie
+        var allIds = document.querySelectorAll('*[id]');
+        for (var e of allIds) {
+          if (!e.id || e.id[0] == '_')
+            continue;
+          var data = getCookie(e.id);
+          if (data !== null) {
+            updateInfo(e, data);
+          }
+        }
+
+        // Check params
         var searchParams = new URLSearchParams(window.location.search);
         for (var p of searchParams) {
+          if (p[0][0] == '_')
+            continue;
           var cur = document.getElementById(p[0]);
           if (!cur) {
             continue;
           }
 
-          if (cur.tagName === "SPAN") {
-            cur.innerText = p[1];
-          } else if (cur.tagName === "IMG") {
-            cur.src = p[1];
-          } else {
-            cur.value = p[1];
+          if (document.getElementById("item-" + cur.id)) {
+            document.getElementById("item-" + cur.id).classList.remove("hidden");
           }
+
+          if (!p[1]) {
+            continue;
+          }
+          
+          setCookie(p[0], p[1]);
+          updateInfo(cur, p[1]);
         }
       }
 
