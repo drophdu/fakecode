@@ -5,40 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>杭电助手</title>
+    <link rel="stylesheet" href="/css/holakit.css">
     <style>
-      /* montserrat-regular */
-      @font-face {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: regular;
-        src: url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.eot'); /* IE9 Compat Modes */
-        src: local('Montserrat'), local('Montserrat-Normal'),
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
-      }
-        
-      /* montserrat-700 */
-      @font-face {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 700;
-        src: url('//lib.baomitu.com/fonts/montserrat/montserrat-700.eot'); /* IE9 Compat Modes */
-        src: local('Montserrat'), local('Montserrat-Normal'),
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-700.woff2') format('woff2'), /* Super Modern Browsers */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-700.woff') format('woff'), /* Modern Browsers */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-700.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('//lib.baomitu.com/fonts/montserrat/montserrat-700.svg#Montserrat') format('svg'); /* Legacy iOS */
-      }
-      </style>
-      <link rel="stylesheet" href="/css/holakit.css">
-      <style>
-      body .font-theme {
-        font-family: Montserrat,SF Pro SC,SF Pro Text,SF Pro Icons,PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif!important
-      }
       .align-right {
         float: right;
         text-align: right;
@@ -73,8 +41,8 @@
     </style>
     <script src="/js/easy.qrcode.min.js"></script>
   </head>
-  
   <body class="hola-body-typography hola-grey-bg">
+    
     <header class="hola-navbar hola-navbar-transparent hola-navbar-darkbg">
       <div class="hola-container">
         <nav class="hola-navbar-main">
@@ -160,7 +128,7 @@
             </div>            
             <div class="hola-card-list-item">
               <p>请假类型（必填）</p>
-              <select id="leave-type" value="0" style="width:100%" disabled="disabled">
+              <select id="leave-type" value="0" style="width:100%;height:24px" disabled="disabled">
                 <option value="0">&lt; 请选择 &gt;</option>
                 <option value="1">2小时以内</option>
                 <option value="2">2小时以上(当天门禁前回校)</option>
@@ -171,17 +139,17 @@
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假开始日期（必填）</p>
               <p class="desc-line">离开学校的日期</p>
-              <input id="date-from" type="date" style="width:100%" disabled="disabled" />
+              <input id="date-from" type="date" style="width:100%;height:24px" disabled="disabled" />
             </div>
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假结束日期（必填）</p>
               <p class="desc-line">返回学校的日期</p>
-              <input id="date-to" type="date" style="width:100%" disabled="disabled" />
+              <input id="date-to" type="date" style="width:100%;height:24px" disabled="disabled" />
             </div>
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0">请假原因（必填）</p>
               <p class="desc-line">请说明请假的原因，如果有具体的离校时间，也可以附上</p>
-              <textarea id="excuse" style="width:100%" disabled="disabled" placeholder=""></textarea>
+              <textarea id="excuse" style="width:100%;height:24px" disabled="disabled" placeholder=""></textarea>
             </div>
             <div id="_item-attach" class="hola-card-list-item hidden">
               <p style="margin-bottom: 0">附件</p>
@@ -190,7 +158,7 @@
             </div>
             <div class="hola-card-list-item">
               <p>请假期间是否离开浙江（必填）</p>
-              <select id="leave-zj" value="0" style="width:100%" disabled="disabled">
+              <select id="leave-zj" value="0" style="width:100%;height:24px" disabled="disabled">
                 <option value="0">&lt; 请选择 &gt;</option>
                 <option value="1">否</option>
                 <option value="2">是</option>
@@ -199,7 +167,7 @@
             <div class="hola-card-list-item">
               <p style="margin-bottom: 0;">签名（必填）</p>
               <p class="desc-line">本人郑重承诺:我承诺上述内容真实有效，离校期间注意自身安全，如有身体不适及时向学校报告</p>
-              <img id="sign" style="width:100%" src="" />
+              <img id="sign" style="width:100%;height:24px" src="" />
               <p class="desc-line">请点击「确认」上传签名后再提交表单。</p>
             </div>
           </div>
@@ -222,6 +190,7 @@
     
     <script>
       function setCookie(cname, cvalue) {
+        cvalue = escape(cvalue);
         var d = new Date(), exdays = 365;
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires="+d.toUTCString();
@@ -237,7 +206,7 @@
             c = c.substring(1);
           }
           if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+            return unescape(c.substring(name.length, c.length));
           }
         }
         return null;
