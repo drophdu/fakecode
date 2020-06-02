@@ -1,0 +1,42 @@
+html {
+    --hola-primary-color: #3498db;
+}
+.align-right {
+    float: right;
+    text-align: right;
+}
+.qr {
+    float: center;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.hola-card {
+    border-radius: 3px;
+}
+.hola-navbar {
+    height: 60px;
+}
+.desc-line {
+    font-size: .8em;
+}
+.hidden {
+    display: none;
+}
+.fake-hero {
+    min-height: 100px; 
+    max-height: 120px;
+}
+.fake-nav {
+    background-color: #3498db !important;
+    height: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    font-size: 1.2em;
+}
+.container {
+    display: table;
+    width: 100%;
+}
