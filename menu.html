@@ -82,11 +82,6 @@
         var hour = date.getHours();
         var minute = date.getMinutes();
         var second = date.getSeconds();
-        var ampm = "AM";
-        if (hour > 12) {
-          hour -= 12;
-          ampm = "PM";
-        }
         
         if (hour < 10) {
           hour = "0" + hour;
@@ -98,7 +93,7 @@
           second = "0" + second;
         }
 
-        document.getElementById("time").innerText = hour + ":" + minute + ":" + second + " " + ampm;
+        document.getElementById("time").innerText = hour + ":" + minute + ":" + second;
       }
 
       function isElementInView(elem) {
